@@ -1,0 +1,33 @@
+<div class="container"  *ngIf="!error.status">
+    <div role="postoptions mt-2" class="d-flex">
+
+        <strong>Options:</strong>
+        <div class="ms-auto"> 
+            <button class="btn btn-outline-danger " (click)="deletePost()">Delete Post</button>
+            <button class="btn btn-outline-primary" (click)="editPost()">Edit Post</button>
+        </div>
+    </div>
+    <div class="col-12 row w-100  h-25 rounded p-4 border rounded-border mt-2 shadow" >
+        <div class="col-2 text-end ">
+            <img src="assets/person-fill.svg" class="border rounded-circle w-50 " alt="user pic" />
+        </div>
+        <div class="col text-bg-light rounded-end" >
+            <div class="w-100 d-flex  ">
+                <h4 class="fs-5"><strong class="text-capitalize">{{postdetails.userName}}</strong></h4>
+                <span>@{{postdetails.profession}}</span>
+                <div class="d-inline ms-auto" style="color: dimgrey;">
+                    <span>postedon:</span>
+                    <span>{{postdetails.createdDate | dateObject | date:'fullDate'}}</span>
+                </div>
+            </div>
+            <p>{{postdetails.post}}</p>
+            <img *ngIf="postdetails.postImageId" src={{postdetails.postImageUrl}} class="w-50" alt="userpostedImage"/>
+        </div>
+    </div>
+    
+
+    
+</div>
+<div *ngIf="error.status" class="alert alert-danger" role="alert">
+    {{error.message}}
+</div>

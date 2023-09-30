@@ -1,0 +1,169 @@
+<div class="container" [@fade]>
+  <div class="row">
+    <div class="col-12 h-25 d-flex align-items-center mh-25" >
+      <input #fileInput type="file" style="display: none" accept="image/*" (change)="uploadProfilePicture($event)">
+      <img style="width: 20%;"[src]="profilePic" alt="profile pic" class=" rounded-circle border p-1"  (click)="activateInputFile(fileInput)"/>
+      <span class="display-5">{{(userDetails.firstName + userDetails.lastName) | capitalize}}</span>
+      <div class="inline-block ms-auto row" >
+        <span class="  text-center col " style="height: 8.7rem;width: 7rem;" id="reset" (click)="resetPassword()">Reset Password<img style="width: 50%;"src="assets/fingerprint.svg" alt="svg image"/></span>
+        <span class=" text-center col " style="line-height: 3;height: 8.7rem;width: 7rem;" id="logout" (click)="logoutUser()">Log Out<img style="width: 50%;"src="assets/indent.svg" alt="svg image"/></span>
+      </div>
+    </div>
+    <hr/>
+    <div class="col-12">
+      <div class="center-container container" >
+        <div class="row">
+          <div class="col-12 d-flex">
+            <h2 >User Profile</h2>
+            <div class="ms-auto row">
+              <img src="assets/edit_icon.svg" id="edit_icon"alt="edit_icon" (click)="activateEditMode($event)"/>
+            </div>
+          </div>
+            <form class="col-12 row " [formGroup]="userDetailsUpdateForm" (ngSubmit)="updateUserInfo()">
+
+              <!-- ---------------------------first name------------------------------------------- -->
+                <div class="col-6">
+                    <label for="fname" class="form-label" >First Name</label><span class="text-danger" >*</span>
+                    <input type="text"class="form-control " 
+                     formControlName="firstname" id="fname"
+                        [ngClass]="{ error:userDetailsUpdateForm.controls['firstname'].invalid && userDetailsUpdateForm.controls['firstname'].touched }" />
+                      <div *ngIf="(userDetailsUpdateForm.controls['firstname'].invalid &&
+                      !userDetailsUpdateForm.controls['firstname'].pristine) &&
+                        userDetailsUpdateForm.controls['firstname'].errors && 
+                        userDetailsUpdateForm.controls['firstname'].errors['required']" 
+                        class="text-danger">
+                          PLEASE Fill THIS FIELD
+                      </div>
+                </div>
+                <!-- ------------------------------last name-------------------------------------- -->
+
+                <div class="col-6">
+                    <label for="lname"class="col-3"class="form-label ">Last Name</label><span class="text-danger">*</span>
+                    <input type="text" id="lname" formControlName="lastname"
+                     class="form-control" id="lname"
+                      [ngClass]="{ error:userDetailsUpdateForm.controls['lastname'].invalid && userDetailsUpdateForm.controls['lastname'].touched }" />
+                    <div *ngIf="(userDetailsUpdateForm.controls['lastname'].invalid &&
+                     !userDetailsUpdateForm.controls['lastname'].pristine) &&
+                     userDetailsUpdateForm.controls['lastname'].errors && 
+                     userDetailsUpdateForm.controls['lastname'].errors['required']" 
+                     class="text-danger">
+                        PLEASE Fill THIS FIELD
+                    </div>
+                </div>
+
+                <!-- --------------------------------email------------------------------------------------- -->
+            
+                <div class="col-12">
+                    <label for="email" class="form-label" >Email</label><span class="text-danger">*</span>
+                    <input type="email"class="form-control" id="email" 
+                    formControlName="email"
+                    [ngClass]="{ error:userDetailsUpdateForm.controls['email'].invalid && userDetailsUpdateForm.controls['email'].touched }"  />
+                    <div *ngIf="(userDetailsUpdateForm.controls['email'].invalid &&
+                     !userDetailsUpdateForm.controls['email'].pristine) &&
+                      userDetailsUpdateForm.controls['email'].errors && 
+                      userDetailsUpdateForm.controls['email'].errors['required']" class="text-danger">
+                        PLEASE Fill THIS FIELD
+                    </div>
+                    <div *ngIf="(userDetailsUpdateForm.controls['email'].invalid && 
+                    !userDetailsUpdateForm.controls['email'].pristine) &&
+                     userDetailsUpdateForm.controls['email'].errors &&
+                      userDetailsUpdateForm.controls['email'].errors['email']" class="text-danger">
+                        PLEASE Fill A VALID MAIL ID
+                    </div>
+                </div>
+
+                <!-- -------------------------------------date of birth--------------------------------- -->
+
+                <div class="col-12">
+                    <label for="dob" class="form-label" >Date of birth</label><span class="text-danger">*</span>
+                    <input type="date"class="form-control" id="dob" 
+                    formControlName="dob" 
+                     [ngClass]="{ error:userDetailsUpdateForm.controls['dob'].invalid && 
+                     userDetailsUpdateForm.controls['dob'].touched }"  />
+                    <div *ngIf="(userDetailsUpdateForm.controls['dob'].invalid && 
+                    !userDetailsUpdateForm.controls['dob'].pristine) &&
+                    userDetailsUpdateForm.controls['dob'].errors && 
+                    userDetailsUpdateForm.controls['dob'].errors['required']" class="text-danger">
+                        PLEASE Fill THIS FIELD
+                    </div>
+                </div>
+
+                <!-- ----------------------------gender------------------------------------------------- -->
+
+                <div class="col-12">
+                    <label for="gender" class="form-label" >Gender</label><span class="text-danger">*</span>
+                    <select id="gender"  class="form-control" formControlName="gender">
+                        <option value="male">male</option>
+                        <option value="female">female</option>
+                        <option value="other">other</option>
+                    </select>
+                </div>
+
+                <!-- -----------------------------------phonenumber----------------------------------------- -->
+
+                <div class="col-12">
+                  <label for="phone" class="form-label" >Phone Number:</label>
+                  <input type="text"class="form-control" id="phone"  formControlName="phonenumber"  
+                  [ngClass]="{ error:userDetailsUpdateForm.controls['phonenumber'].invalid && 
+                     userDetailsUpdateForm.controls['phonenumber'].touched }" />
+                     <div *ngIf="(userDetailsUpdateForm.controls['phonenumber'].invalid && 
+                    !userDetailsUpdateForm.controls['phonenumber'].pristine) &&
+                    userDetailsUpdateForm.controls['phonenumber'].errors && 
+                    userDetailsUpdateForm.controls['phonenumber'].errors['pattern']" class="text-danger">
+                        PLEASE ENTER A VALID PHONE NUMBER
+                    </div>
+                </div> 
+
+                <!-- ------------------------------------country-------------------------------------------- -->
+
+                <div class="col-12 col-md-6" id="country-cont">
+                  <label for="country" class="form-label" >country:</label>
+                  
+                  <input type="text"class="form-control" id="country" formControlName="country"  appDynamiclist [Observable$]="countries$" (selected)="selectedCountry($event)" Searchby="name" autocomplete="false">
+                  <!-- <ul style="display: none;position:relative">
+                    <li *ngFor="let country of countries" class="nav-link border-bottom p-2">{{country.name}}</li>
+                  </ul> -->
+                </div> 
+                <!-- ------------------------------------state-------------------------------------------- -->
+
+
+                <div class="col-12 col-md-6">
+                  <label for="city" class="form-label" >state:</label>
+                  <input type="text"class="form-control" id="city" formControlName="state" (click)="stateClicked($event)" appDynamiclist [Observable$]="states$" (selected)="selectedState($event)" Searchby="name" autocomplete="false"/>
+                </div>
+
+                <!-- ------------------------------------city-------------------------------------------- -->
+
+
+                <div class="col-12 col-md-6">
+                  <label for="city" class="form-label" >City:</label>
+                  <input type="text"class="form-control" id="city" formControlName="city" />
+                </div>
+
+                <!-- ------------------------------------pincode-------------------------------------------- -->
+
+               
+                <div class="col-12 col-md-6">
+                  <label for="pincode" class="form-label" >pincode:</label>
+                  <input type="number"class="form-control" id="pincode" formControlName="pincode" />
+                </div>
+                
+                
+                
+    
+    
+                
+                <div *ngIf="isEditModeOn">
+                    <input type="submit" value="Reset Fields" class="btn btn-primary mt-2" [disabled]="userDetailsUpdateForm.invalid"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <i class="bi bi-pencil-square"></i> -->

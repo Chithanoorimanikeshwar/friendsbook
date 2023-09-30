@@ -1,0 +1,35 @@
+<div >
+    <app-post></app-post>
+    <div class="container mt-2" id="top">
+        <div class="row" >
+            <div class="col-12 row w-100  h-25 rounded p-4 border rounded-border mt-2 hshadow" *ngFor="let user of posts"  (click)="postClicked(user)"  [id]="user.userId" >
+                <div class="col-2 text-end ">
+                    <img src="assets/person-fill.svg" class="border rounded-circle w-50 " alt="user pic" />
+                </div>
+                <div class="col text-bg-light rounded-end" >
+                    <div class="w-100 d-flex  ">
+                        <h4 class="fs-5"><strong class="text-capitalize">{{user.userName}}</strong></h4>
+                        <span>@{{user.profession}}</span>
+                        <div class="d-inline ms-auto" style="color: dimgrey;">
+                            <span>postedon:</span>
+                            <span>{{user.createdDate | dateObject | date:'fullDate'}}</span>
+                        </div>
+                    </div>
+                    <p>{{user.post}}</p>
+                    <img *ngIf="user.postImageId" src={{user.postImageUrl}}  width="200px" alt="userpostedImage"/>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="FetchMorePosts"class=" my-3 d-flex justify-content-center w-100 position-relative">
+            <div *ngIf="fetchMorePostsLoader" class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <button *ngIf="!fetchMorePostsLoader" class="btn btn-success rounded-pill" (click)="fetchMorPosts($event)" #fetchpostsbtn>Fetch Mor Posts</button>
+            <img (click)="scrollTop()"  class="position-absolute bottom-0 end-0" width="40vw" style="max-width: 50px;" src="assets/arrow-up-circle.svg" alt="top"/>
+        </div>
+    
+    </div>
+</div>
+
+
+

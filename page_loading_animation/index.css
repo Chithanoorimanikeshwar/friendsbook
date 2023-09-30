@@ -1,0 +1,141 @@
+
+:root{
+    font-family:helvetica,Arial,sans-serif;
+    box-sizing:border-box;
+    background-color:#709b90;
+}
+*,::after,::before{
+    box-sizing:inherit; 
+}
+.body{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+
+}
+.my-container {
+    display: flex;
+    width:200px;
+    flex-wrap: wrap;
+    height:200px;
+    /* border:1px solid black; */
+    position: relative;
+}
+.box{
+   min-width:99px;
+   height:100px;
+    border:2px solid #f5f5f5;
+    border-radius: 1em;
+   
+    
+}
+.min-box{
+    padding: 15px 0px 0px 15px;
+    border:2px solid whitesmoke;
+    background-color: chartreuse;
+    animation-name: initial;
+}
+.f{
+    position:absolute;
+    z-index:2;
+    right:100px;
+    bottom: 100px;
+    font-size: 2rem;
+}
+.b{
+    position:absolute;
+    z-index:2;
+    right:calc(100px - 40.34px);
+    bottom: calc(100px - 56px);
+    font-size: 2rem;
+}
+.box-yellow{
+    background-color: yellow;
+    animation: box-yellow 2s linear infinite;
+   
+}
+.box-blue{
+    background-color: rgb(52,15, 216);
+    animation:box-blue 2s linear  infinite;
+}.box-skyblue{
+    background-color: rgb(23, 204, 236);
+    animation: box-skyblue 2s linear infinite;
+}.box-red{
+    background-color: red;
+    animation: box-red 2s linear infinite;
+
+}
+
+@keyframes box-yellow {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(100%);
+    }
+    50% {
+        transform: translateX(100%) translateY(100%);
+    }
+    75% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateX(0) ;
+    }
+    /* 100% {
+        transform: translateY(0);
+    } */
+}
+@keyframes box-blue {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateY(100%);
+    }
+    50% {
+        transform: translateY(100%) translateX(-100%);
+    }
+    75% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0) ;
+    }
+    
+}
+@keyframes box-red{
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateY(-100%) translateX(-100%);
+    }
+    75% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateX(0) ;
+    }
+}
+@keyframes box-skyblue{
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateY(-100%);
+    }
+    50% {
+        transform: translateX(100%) translateY(-100%);
+    }
+    75% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0) ;
+    }
+}

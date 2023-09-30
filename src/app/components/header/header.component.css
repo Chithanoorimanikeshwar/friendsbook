@@ -1,0 +1,21 @@
+
+.center-container{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    position:fixed;
+    width:100vw;
+    background-color: #2d5a339c;
+    
+
+}
+.navbar-shortcut{
+    position:fixed;
+    z-index: 50;
+    right:0;
+    top:0;
+    width:8vw;
+    height:8vh;
+
+}

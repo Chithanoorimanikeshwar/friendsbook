@@ -1,0 +1,68 @@
+<div class="center-container container" [@fade]>
+    <div class="row">
+        <h2 class="col-12">Registeration Form</h2>
+        <form class="col-12 row " ngForm #f="ngForm" (ngSubmit)="formSubmitted(f.form.value)" >
+            <div class="col-6">
+                <label for="fname" class="form-label" >First Name</label><span class="text-danger">*</span>
+                <input type="text"class="form-control " id="fname" name="fname" required pattern="[a-zA-Z]+" name="firstName"ngModel #fname="ngModel" [ngClass]="{ error:fname.invalid && fname.touched }" />
+                <div *ngIf="(fname.invalid && !fname.pristine) && fname.errors && fname.errors['required']" class="text-danger">
+                    PLEASE Fill THIS FIELD
+                </div>
+            </div>
+            <div class="col-6">
+                <label for="lname"class="col-3"class="form-label ">Last Name</label><span class="text-danger">*</span>
+                <input type="text" id="lname" name="lname"class="form-control" name="lastName" pattern="[a-zA-Z]+" required ngModel #lname="ngModel" [ngClass]="{ error:lname.invalid && lname.touched }" />
+                <div *ngIf="(lname.invalid && !lname.pristine) && lname.errors && lname.errors['required']" class="text-danger">
+                    PLEASE Fill THIS FIELD
+                </div>
+            </div>
+        
+            <div class="col-12">
+                <label for="email" class="form-label" >Email</label><span class="text-danger">*</span>
+                <input type="email"class="form-control" id="email" required email name="email" ngModel #email="ngModel" [ngClass]="{ error:email.invalid && email.touched }"  />
+                <div *ngIf="(email.invalid && !email.pristine) && email.errors && email.errors['required']" class="text-danger">
+                    PLEASE Fill THIS FIELD
+                </div>
+                <div *ngIf="(email.invalid && !email.pristine) && email.errors && email.errors['email']" class="text-danger">
+                    PLEASE Fill A VALID MAIL ID
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="dob" class="form-label" >Date of birth</label><span class="text-danger">*</span>
+                <input type="date"class="form-control" id="dob" required  name="dob" ngModel #dob="ngModel" [ngClass]="{ error:dob.invalid && dob.touched }"  />
+                <div *ngIf="(dob.invalid && !dob.pristine) && dob.errors && dob.errors['required']" class="text-danger">
+                    PLEASE Fill THIS FIELD
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="dob" class="form-label" >Gender</label><span class="text-danger">*</span>
+                <select id="gender" name="gender" class="form-control" ngModel>
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                    <option value="other">other</option>
+                </select>
+            </div>
+
+
+            <div class="col-12 row"   >
+                <div class="col-12 col-lg-6">
+                    <label class="form-label" for="password ">Password</label>
+                    <input type="password"class="form-control" id="password" ngModel name="password" required #password="ngModel" [ngClass]="{ error:password.invalid && password.touched }" />
+                    <div *ngIf="(password.invalid && !password.pristine) && password.errors && password.errors['reduired']" class="text-danger">
+                        PLEASE Fill THE PASSWORD
+                    </div>
+                </div>  
+                <div class="col-12 col-lg-6">
+                    <label class="form-label" for="cpassword " >conform assword</label>
+                    <input type="password"class="form-control" id="cpassword" required ngModel name="cpassword" Mustmatch #cpassword="ngModel" [ngClass]="{ error:cpassword.invalid && cpassword.touched }" />
+                    <div *ngIf="(cpassword.invalid && !cpassword.pristine) && cpassword.errors && cpassword.errors['mustmatch']" class="text-danger">
+                        PASSWORD NOT MATCH
+                    </div>
+                </div> 
+            </div>
+            <div>
+                <input type="submit" value="submit" class="btn btn-primary mt-2" [disabled]="f.invalid" />
+            </div>
+        </form>
+    </div>
+</div>

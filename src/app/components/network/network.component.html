@@ -1,0 +1,80 @@
+<div class="container mt-3" [@fade]>
+    <form class="d-flex" role="search" #searchform="ngForm">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" ngModel="" name="search">
+        <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+    </form>
+    <div class="accordion accordion-flush" id="accordionFlushExample mt-4">
+    <div class="accordion-item" *ngFor="let user of users;index as i">
+        <h2 class="accordion-header">
+        <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#'+user._id" aria-expanded="false" (click)="userMoreInfo(user,profilepic,$event)" aria-controls="flush-collapseOne">
+            F-{{i+1}} {{user.firstName + user.lastName}}
+           
+        </button>
+       
+        </h2>
+        <div id={{user._id}}   class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+            <div class=" row m-0 p-1 " >
+                <span class=" m-2 col-md-3 col-12"   ><img #profilepic class="img-thumbnail border rounded-circle" alt="profile pic"></span>
+                <span class="fs-5 mx-3 col-md-auto col-12 align-self-center "[ngClass]="{'position-relative':user.isActive}">{{user.firstName + user.lastName}}
+                    <span *ngIf="user.isActive" class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                      </span>
+                </span>
+                <button 
+                class="btn  col-md-2 col-12 h-50 mx-2 align-self-center ms-auto" 
+                [attr.aria-label]="friendshipStatus(user)"   
+                [ngClass]="{'btn-outline-secondary':user.FriendRequestSent,
+                'btn-success':user.FriendRequestReceived,
+                'btn-outline-success':user.AlreadyFriend,
+                'btn-primary':!(user.FriendRequestSent || user.AlreadyFriend || user.FriendRequestReceived )}" 
+                [disabled]="user.FriendRequestSent || user.AlreadyFriend || user.AlreadyFriend"
+                 id={{user._id}} 
+                  (click)="btnClicked($event,user.RequestId,user.FriendRequestReceived)"> 
+                 {{friendshipStatus(user)}}
+                </button>
+                <button class="btn btn-outline-info col-md-2 col-12 h-50 align-self-center" #requestbtn aria-label="request cancel" disabled>cancel Request</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+        
+        <!-- <div class="col mt-2" (click)="userMoreInfo($event)" *ngFor="let user of users;index as i" > 
+            
+            <div class="border rounded  row m-0 p-1 " >
+                <span class=" m-2 col-md-3 col-12"  style="width:4rem" >F-{{i+1}}</span>
+                <span class="fs-5 mx-3 col-md-auto col-12 align-self-center">{{user.firstName + user.lastName}}</span>
+                <button 
+                class="btn  col-md-2 col-12 h-50 mx-2 align-self-center ms-auto" 
+                [attr.aria-label]="friendshipStatus(user)"   
+                [ngClass]="{'btn-outline-secondary':user.FriendRequestSent,
+                'btn-success':user.FriendRequestReceived,
+                'btn-outline-success':user.AlreadyFriend,
+                'btn-primary':!(user.FriendRequestSent || user.AlreadyFriend || user.FriendRequestReceived )}" 
+                [disabled]="user.FriendRequestSent || user.AlreadyFriend || user.AlreadyFriend"
+                 id={{user._id}} 
+                  (click)="btnClicked($event,user.RequestId,user.FriendRequestReceived)"> 
+                 {{friendshipStatus(user)}}
+                </button>
+                <button class="btn btn-outline-info col-md-2 col-12 h-50 align-self-center" #requestbtn aria-label="request cancel">cancel Request</button>
+            </div>
+        </div> -->
+
+
+    <!-- </div>
+</div> -->
+
+
+<app-loading-overlay *ngIf="isloading"></app-loading-overlay>
+ <!-- <div class="col-md-4 col-12 border">
+            <img src="assets/person-fill.svg" class="rounded-circle border " alt="..." >
+            <div>
+                <span class="fs-1">username</span>
+                <hr/>
+                <span class="fs-5">connections<span class="badge bg-secondary">0</span></span>
+                <br/>
+                <span class="fs-5">post<span class="badge bg-secondary">0</span></span>
+
+            </div>
+        </div> -->

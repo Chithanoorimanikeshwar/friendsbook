@@ -1,0 +1,8 @@
+
+<div class="container-liquid">
+    <app-loading-overlay *ngIf="isloading"></app-loading-overlay>
+    <div *ngIf="!isloading">
+        <app-header></app-header>
+            <router-outlet></router-outlet>
+    </div>
+</div>

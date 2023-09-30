@@ -1,0 +1,34 @@
+<div class="center-container" [@fade]="fadeState" *ngIf="!isloading" >
+    <div class="row" style="flex-wrap: nowrap;" *ngIf="!isUserLoggedIn">
+    <h2 class="me-3 col-4 display-5" style="align-self: center;">Login</h2>
+    <form class="col-8" #f="ngForm" (ngSubmit)="loginFormSubmitted(f.value)">
+        <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label ">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ngModel required name="email" email>
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control animate" id="exampleInputPassword1" ngModel required name="password">
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Login</button>
+        <a  class="btn btn-outline-primary ms-3" routerLink="/forgetpassword" href="#password">forget password</a>
+
+        <div *ngIf="alertBoxOn" class="p-2 border rounded-2 mt-2" [ngClass]="alertBoxClass?'bg-success':'bg-danger'">{{alertBoxMessage | uppercase}}</div>
+
+    </form>
+    
+    </div>
+    <div [@fade] *ngIf="isUserLoggedIn" class="d-flex width-100 height-100" >
+        <p class="fs-3" style="color: black;">Welcome</p>
+    </div>
+</div>
+
+
+
+
+
+
+<app-loading-overlay *ngIf="isloading"></app-loading-overlay>
+
+  

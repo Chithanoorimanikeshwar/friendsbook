@@ -1,0 +1,33 @@
+<div class="row border m-0" style="position:relative;">
+    <img class="col-12 object-fit-fill p-0" src="assets/app_background.jpg" alt="profile-pic" style="height:30vh;width:100vw" (click)="updateForeProfile()"/>
+    <h5 class="clearfix fs-2 " style="top: calc( 30vh - 2.5rem);width:auto;color: white;">{{username | capitalize}}</h5>
+    <ul class="d-flex justify-content-end" style="position: absolute;top: calc( 30vh - 2.5rem);">
+        <li class="btn btn-success ">connections<i class="badge text-bg-secondary">4</i></li>
+        <li class="btn btn-primary ms-2">posts<i class="badge text-bg-secondary">4</i> </li>
+    </ul>
+    <div class="p-0 bg-body-tertiary " style="position:relative;height:10vh">
+        <nav class="navbar navbar-expand-sm bg-body-tertiary clearfix">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul *ngIf="!isfriendspaceactive" class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="subhome" routerLinkActive="active">Home</a>
+                  </li>
+        
+                  <li  class="nav-item">
+                    <a class="nav-link" href="#">Photos</a>
+                  </li>
+                  <li   class="nav-item">
+                    <a class="nav-link" routerLink="myposts" routerLinkActive="active">Myposts</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+    </div>
+    <img [src]="userDetails.profileUrl" class="mini-profile-pic border p-0 shadow" alt="profile-pic"/>
+
+</div>

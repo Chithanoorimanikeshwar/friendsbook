@@ -1,0 +1,67 @@
+<div [@fade] >
+<app-profile [UserDetails]="userdetails$" [isfriendspaceactive]="true" ></app-profile>
+<div class="container ">
+    <div *ngIf="userdetails"class="row border rounded p-4 gx-2 bg-info bg-gradient">
+        <label class="fs-5"><strong>UserInfo:</strong></label>
+        <div class="col-12 ">
+            <label for="email">Email:</label>
+            <span id="email">{{userdetails.email}}</span>
+        </div>
+        <div class="col-12 ">
+            <label for="dob">Date Of Birth:</label>
+            <span id="dob">{{userdetails.dob | dateObject | date:"longDate"}}</span>
+        </div>
+        <div class="col-12 ">
+            <label for="gender">Gender:</label>
+            <span id="gender">{{userdetails.gender}}</span>
+        </div>
+        <div *ngIf="userdetails.country" class="col-12">
+            <label for="country">country:</label>
+            <span id="country">{{userdetails.country}}</span>
+        </div>
+        <div *ngIf="userdetails.state" class="col">
+            <label for="state">state:</label>
+            <span id="state">{{userdetails.state}}</span>
+        </div>
+
+    </div>
+    <div  *ngIf="posts">
+        <div class="row" >
+            <div class="col-12 row w-100  h-25 rounded p-4 border rounded mt-2 hshadow" *ngFor="let user of posts" (click)="postClicked(user.userId,user._id)" >
+                <div class="col-2 text-end ">
+                    <img src="assets/person-fill.svg" class="border rounded-circle w-50 " alt="user pic" />
+                </div>
+                <div class="col text-bg-light rounded-end" >
+                    <div class="w-100 d-flex  ">
+                        <h4 class="fs-5"><strong class="text-capitalize">{{user.userName}}</strong></h4>
+                        <span>@{{user.profession}}</span>
+                        <div class="d-inline ms-auto" style="color: dimgrey;">
+                            <span>postedon:</span>
+                            <span>{{user.createdDate | dateObject | date:'fullDate'}}</span>
+                        </div>
+                    </div>
+                    <p>{{user.post}}</p>
+                    <img *ngIf="user.postImageId" src={{user.postImageUrl}}  width="200px"alt="userpostedImage"/>
+                </div>
+            </div>
+        </div>
+        <!-- <div *ngIf="FetchMorePosts"class=" my-3 d-flex justify-content-center w-100 position-relative">
+            <div *ngIf="fetchMorePostsLoader" class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            <button *ngIf="!fetchMorePostsLoader" class="btn btn-success rounded-pill" (click)="fetchMorPosts()">Fetch Mor Posts</button>
+            <img (click)="scrollTop()"  class="position-absolute bottom-0 end-0" width="40vw" style="max-width: 50px;" src="assets/arrow-up-circle.svg" alt="top"/>
+        </div> -->
+     
+    </div>
+
+
+
+
+    <div *ngIf="!posts" class="alert alert-primary" role="alert">
+        No Posts to Fetch
+      </div>
+</div>
+</div>
+
+<router-outlet *ngIf="!isrouterOutletActive"></router-outlet>
